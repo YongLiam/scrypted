@@ -44,14 +44,15 @@ let passcode = document.getElementById('pass').value;
         }
         sortResult(results);
         checkRank();
-        if(lobby != "lcsA") { //lobby A has logo
+        if(lobby != "lcsA" && lobby != "pmco") { //lobby A and PMCO has logo
        if(results.length <= 12)
       {
         document.getElementById("singleTable").style.display = "block";
       for(let i=0; i<results.length; i++)
       {
         if(results[i].rank == undefined)
-        results[i].rank = '';
+      document.getElementById("row["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td>';
+      else
       document.getElementById("row["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td><td>'+results[i].rank+'</td>'
       }
     }
@@ -61,7 +62,8 @@ let passcode = document.getElementById('pass').value;
       for(let i=0; i<results.length; i++)
       {
         if(results[i].rank == undefined)
-        results[i].rank = '';
+      document.getElementById("roww["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td>';
+      else
       document.getElementById("roww["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td><td>'+results[i].rank+'</td>'
       }
          }
@@ -73,9 +75,9 @@ let passcode = document.getElementById('pass').value;
             for(let i=0; i<results.length; i++)
             {
               if(results[i].rank == undefined)
-              results[i].rank = '';
+            document.getElementById("row["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-logo"><img src="'+results[i].team.logo+'"/></div><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td>'
+            else
             document.getElementById("row["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-logo"><img src="'+results[i].team.logo+'"/></div><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td><td>'+results[i].rank+'</td>'
-
             }
           }
             else{
@@ -84,7 +86,8 @@ let passcode = document.getElementById('pass').value;
             for(let i=0; i<results.length; i++)
             {
               if(results[i].rank == undefined)
-              results[i].rank = '';
+            document.getElementById("roww["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-logo"><img src="'+results[i].team.logo+'"/></div><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td>'
+            else
             document.getElementById("roww["+i+"]").innerHTML = '<td class="sn"><center>'+(i+1)+'</center></td><td><div class="clan"><div class="clan-logo"><img src="'+results[i].team.logo+'"/></div><div class="clan-name">'+ results[i].team.name +'</div></div></td><td><center>'+ results[i].matches +'</center></td><td><center>'+ results[i].wwcd +'</center></td><td><center>'+ results[i].placement +'</center></td><td><center>'+ results[i].kills +'</center> </td> <td> <center>'+ results[i].total +'</center></td><td>'+results[i].rank+'</td>'
 
             }
@@ -132,8 +135,6 @@ let passcode = document.getElementById('pass').value;
         results[j].rank = '<span style="float:left;"><span style="color:green;"">↑</span><span style="font-size:13px">'+(i-j)+'</span></span>';
         else if((i-j)<0)
         results[j].rank = '<span style="float:left;"><span style="color:red;">&#8595;</span><span style="font-size:13px">'+(i-j)+'</span></span>';
-        else
-        results[j].rank = '';
       }
     }
   }

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <title>PMCO PRACTICE SCRIMS</title>
+<!-- Firebase -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
+       <script src="js.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    
+  </head>
+  
+  <body onload="getLeaderboard()" style="max-width:1550px;">
+  <div class="pmco">
+      <div class="holder" id="holder">
+    <div class="row">
+        <div class="col l12 m12 s12 no-pad">
+          <!-- <img class="pubg" style="width:200px; float:left; margin-top:10px; margin-left:10px;" /> -->
+          <span id="date" style="width:200px; float:left; margin-top:50px; margin-left:50px; color: white;"></span>
+          <div class="creator mt-20">
+            <div class="creator-name">
+              SCRYPTED ESPORTS
+            </div>
+            <div class="creator-img">
+              <img src="https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2Fscrypted_icon.png?alt=media&token=06f54655-5b45-46ad-8d71-4ff5eb2b6f44" />
+            </div>
+          </div>
+         
+        </div>
+        <!-- <h4 class="board-name m-col" id="bname">{{ boardData.name }}</h4> -->
+        <!-- <img class="sponsorimg2" style="width:200px; height:100px;" /> -->
+        <br>
+        <center><h9 class="board-name m-col" id="bname" style="font-size:30px;">PMCO PRACTICE SCRIMS</h9></center>
+        <div style="margin-left: 50%;"><img src="https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2Fpmco.png?alt=media&token=466f8db9-008e-43cf-91ad-455650a9e63d" width="80px;" style="margin-top:10px;"/></div>
+          <!-- <div style="margin-bottom:100px;"> --> 
+
+            <!-- <=12 teams -->
+            <div class="columnSingle">
+            <table id="singleTable" style="display: none;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><center>TEAM</center></th>
+                  <th>
+                    <center>MATCHES<br>PLAYED</center>
+                  </th>
+                  
+                  <th>
+                    <center>CHICKEN<br>DINNERS</center>
+                  </th>
+                  <th>
+                    <center>PLACE<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>KILLS<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>TOTAL<br>POINTS</center>
+                  </th>
+                </tr>
+              </thead>
+    
+              <tbody>
+                <tr id="row[0]" class="boardRows"></tr>
+                <tr id="row[1]" class="boardRows"></tr>
+                <tr id="row[2]" class="boardRows"></tr>
+                <tr id="row[3]" class="boardRows"></tr>
+                <tr id="row[4]" class="boardRows"></tr>
+                <tr id="row[5]" class="boardRows"></tr>
+                <tr id="row[6]" class="boardRows"></tr>
+                <tr id="row[7]" class="boardRows"></tr>
+                <tr id="row[8]" class="boardRows"></tr>
+                <tr id="row[9]" class="boardRows"></tr>
+                <tr id="row[10]" class="boardRows"></tr>
+                <tr id="row[11]" class="boardRows"></tr>
+              </tbody>
+            </table>
+          </div>
+
+            <!-- >12 teams -->
+            <table id="doubleTable" class="column" style="display: none;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><center>TEAM</center></th>
+                  <th>
+                    <center>MATCHES<br>PLAYED</center>
+                  </th>
+                  
+                  <th>
+                    <center>CHICKEN<br>DINNERS</center>
+                  </th>
+                  <th>
+                    <center>PLACE<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>KILLS<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>TOTAL<br>POINTS</center>
+                  </th>
+                </tr>
+              </thead>
+    
+              <tbody>
+                <tr id="roww[0]" class="boardRows"></tr>
+                <tr id="roww[1]" class="boardRows"></tr>
+                <tr id="roww[2]" class="boardRows"></tr>
+                <tr id="roww[3]" class="boardRows"></tr>
+                <tr id="roww[4]" class="boardRows"></tr>
+                <tr id="roww[5]" class="boardRows"></tr>
+                <tr id="roww[6]" class="boardRows"></tr>
+                <tr id="roww[7]" class="boardRows"></tr>
+                <tr id="roww[8]" class="boardRows"></tr>
+                <tr id="roww[9]" class="boardRows"></tr>
+              </tbody>
+            </table>
+            <table id="doubleTable1" class="column" style="display: none;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><center>TEAM</center></th>
+                  <th>
+                    <center>MATCHES<br>PLAYED</center>
+                  </th>
+                  
+                  <th>
+                    <center>CHICKEN<br>DINNERS</center>
+                  </th>
+                  <th>
+                    <center>PLACE<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>KILLS<br>POINTS</center>
+                  </th>
+                  <th>
+                    <center>TOTAL<br>POINTS</center>
+                  </th>
+                </tr>
+              </thead>
+    
+              <tbody>
+                <tr id="roww[10]" class="boardRows"></tr>
+                <tr id="roww[11]" class="boardRows"></tr>
+                <tr id="roww[12]" class="boardRows"></tr>
+                <tr id="roww[13]" class="boardRows"></tr>
+                <tr id="roww[14]" class="boardRows"></tr>
+                <tr id="roww[15]" class="boardRows"></tr>
+                <tr id="roww[16]" class="boardRows"></tr>
+                <tr id="roww[17]" class="boardRows"></tr>
+                <tr id="roww[18]" class="boardRows"></tr>
+                <tr id="roww[19]" class="boardRows"></tr>
+                <tr id="roww[20]" class="boardRows"></tr>
+              </tbody>
+            </table>
+    </div>
+    <table style="width: 100%; margin: 0;"><tr><td><div class="scrypted"><img class="scrypted1" /><img class="scrypted2" /></div>
+      <div class="scrypted"><img class="scrypted3" /><img class="scrypted4" /></div></td>
+     </div>
+  
+     <td style="margin-right: 0;"><div class="sponsor rel"><img class="sponsorimg2" /><img class="sponsorimg1" /></div>
+  <div class="sponsor rel"><img class="sponsorimg3" /><img class="sponsorimg4" /></div>
+  <div class="streamer rel"><img class="streamerimg1" /><img class="streamerimg2" /></div></td></tr>
+    </table>
+     </div>
+     <br/>
+    <a href="index.html"><button class="button" style="background-color:  #8F4299; color: white; border:0">HOME</button></a>
+    <button class="button" onclick="emptyLeaderboard()" style="float: right; background-color: red; color: white; border:0">EMPTY</button>
+  </div>
+</body>
+
+  <script>
+    let results = [];
+    let oldResults = [];
+    let lobby = "pmco";
+   let db = firebase.firestore();
+    function getLeaderboard()
+    {
+      db.collection("leaderboards").doc(lobby).get().then(function(doc) {
+      // pass teams tagName to array
+      if(doc.data().result != undefined)
+      {
+        results = doc.data().result;
+        getOldResult();
+      }
+      else
+      alert("Leaderboard empty")
+  });
+  let n =  new Date();
+  let y = n.getFullYear();
+  let m = n.getMonth() + 1;
+  let d = n.getDate();
+  document.getElementById("date").innerHTML = d + ' / ' + m + ' / ' + y;  
+        
+    }
+
+    function getOldResult() {
+      db.collection("leaderboards").doc(lobby).get().then(function(doc){
+    if(doc.data().oldResult != undefined)
+    {
+      oldResults = doc.data().oldResult;
+      setInterval(loadLeaderboard(), 5000);
+    }
+    else
+    setInterval(loadLeaderboard(), 5000);
+  })
+    }
+
+    function emptyLeaderboard() {
+      if(prompt("Enter lobby code to empty: ") == lobby) {
+        db.collection("leaderboards").doc(lobby).update({
+    result: [],
+    oldResult: [],
+    teams: []
+  }).then(function(){
+    alert("Leaderboard emptied!!");
+    location.reload();
+  }).catch(function(error){
+    alert("Error emptying leaderboard" +error);
+  })
+      }
+      else
+      alert("Wrong lobby code");
+  
+}
+  </script>
+  

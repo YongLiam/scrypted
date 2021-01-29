@@ -581,6 +581,9 @@ width:50%;
         .lcsB .scrypted3{
           content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2F21st.png?alt=media&token=f2317b12-f39b-4e10-9141-525da9391d28");
           }
+          .lcsB .boardRows {
+            background-color: black;
+          }
       .lcsB td {
         border-radius: 10px 20px;
         padding:8px;
@@ -595,5 +598,52 @@ width:50%;
         border-spacing: 2px;
         *border-collapse: expression('separate', cellSpacing = '5px');
       }
-
+      .pmco{
+        color: black;
+      }
+      .pmco .holder{
+      background: url(https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FpmcoWall.jpg?alt=media&token=5b285cc5-df67-4ad6-b168-677415a2e5fb);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      margin:0;
+      }
+      .pmco .sponsorimg1{
+      content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2Fscrypted_icon.png?alt=media&token=06f54655-5b45-46ad-8d71-4ff5eb2b6f44");
+      }
+      .pmco th{
+        color: #FCBD4B;   
+        border-radius: 5px 5px;
+        padding:5px;
+      }
+      .pmco .board-name{
+        color: #FCBD4B;
+      }
       
+      .pmco .scrypted1{
+        content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/clans%2FNOT.jpg?alt=media&token=7b10f7d6-7e95-4491-b7e7-6f343ecebf31");
+        }
+      
+        .pmco .scrypted2{
+          content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/clans%2Fdd.png?alt=media&token=ffcaed23-fdf6-4f72-8cad-58c3ef3f8654");
+          }
+          .pmco .scrypted3{
+            content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2F21st.png?alt=media&token=f2317b12-f39b-4e10-9141-525da9391d28");
+            }
+      
+            .pmco .boardRows {
+              background-color: black;
+            }
+      .pmco .sn {
+        background-color:  #C93F29 ;
+        border-radius: 10px 20px;
+      }
+      .pmco .creator-name{
+        color: #FCBD4B;
+      }
+      .pmco table{
+        color: white;
+        border-collapse: separate;
+        border-spacing: 2px;
+        *border-collapse: expression('separate', cellSpacing = '5px');
+      }
