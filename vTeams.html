@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <title>MODIFY TEAM</title>
+<!-- Firebase -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
+
+  <script>
+  
+  
+// Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  let firebaseConfig = {
+    apiKey: "AIzaSyDxOcHHQhU6egLr2ZkgMlKmqv8dN4z7EAo",
+    authDomain: "scrypted-lcs.firebaseapp.com",
+    projectId: "scrypted-lcs",
+    storageBucket: "scrypted-lcs.appspot.com",
+    messagingSenderId: "449386524331",
+    appId: "1:449386524331:web:9c7b03c26e3814f92fd1ee",
+    measurementId: "G-WJ60BYCL9Z"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+ 
+  </script>
+
+    <link rel="stylesheet" href="styles.css">
+    
+  </head>
+  <style>
+    /*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+input {
+  border: 1px solid white;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+
+.autocomplete-items {
+  position: relative;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  color: black;
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #8F4299;
+  color: white; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: #8F4299 !important; 
+  color: #ffffff; 
+}
+
+  </style>
+  <body>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/8.2.4/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+<a href="index.html" style="float: left;">HOME</a>
+<a href="addTeams.html" style="float: right;">ADD TEAM</a>
+ <br/>
+    
+ 
+
+<!-- View Team div -->
+<div autocomplete="off" class="container" style="max-width: 90rem;">
+  <div class="autocomplete">
+    <center><h4>SEARCH TEAM</h4></center>
+    <center><input id="tagName" type="text" name="tagName" placeholder="Team Tag" style="width: 80%;">
+<button  class="button" onclick="delTeam()" style="background-color: red;"><span>Delete</span></button>
+<button  class="button" onclick="moveTeam()"><span>Move</span></button></center>
+  </div>
+  <br/>
+  <br/>
+</div>
+ 
+  
+  
+<script>
+    //get teams data from firestore
+let tagName = [];
+
+
+let db = firebase.firestore();
+db.collection("teams").get().then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+      // pass teams tagName to array
+      tagName.push(doc.data().tagName);
+
+  });
+});
+
+
+autocomplete(document.getElementById("tagName"), tagName);
+
+//Move Team
+function moveTeam() {
+  let teamName = "";
+  let team = document.getElementById("tagName").value;
+  if(tagName.includes(team))
+  {
+        let newLobby = prompt("Move team to which lobby?");
+    if(newLobby == "A" || newLobby == "B" || newLobby == "C" || newLobby == "a" || newLobby == "b"|| newLobby == "C")
+    {
+      db.collection("teams").where("tagName", "==", team).get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            teamName = doc.id;
+        });
+    }).then(function(){
+      db.collection("teams").doc(teamName).update({
+        lobby: newLobby
+      }).then(function(){
+        alert("Team moved to lobby "+newLobby);
+        location.reload();
+      }).catch(function(error) {
+   alert("Error moving team: ", error);
+});
+    })
+    .catch(function(error) {
+        console.log("Error getting team: ", error);
+    });
+    }
+    else
+    alert("Unrecognized lobby");
+  }
+  else
+  alert("Unrecognized team");
+}
+
+//Delete Team
+function delTeam() {
+  let team = document.getElementById("tagName").value;
+  let teamName = "";
+  if(tagName.includes(team))
+  {
+    if(confirm("Permanently delete "+team))
+    {
+      db.collection("teams").where("tagName", "==", team).get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          teamName = doc.id;
+        });
+    }).then(function(){
+      db.collection("teams").doc(teamName).delete().then(function(){
+        alert("Team Deleted!");
+        location.reload();
+      }).catch(function(error) {
+   alert("Error deleting team: ", error);
+});
+    })
+    .catch(function(error) {
+        alert("Error reading team");
+    });
+    }
+  }
+}
+
+ //autocomplete team/suggestion
+ function autocomplete(inp, arr) {
+
+let currentFocus;
+inp.addEventListener("input", function(e) {
+    let a, b, i, val = this.value;
+    closeAllLists();
+    if (!val) { return false;}
+    currentFocus = -1;
+    a = document.createElement("DIV");
+    a.setAttribute("id", this.id + "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    this.parentNode.appendChild(a);
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        b = document.createElement("DIV");
+        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+        b.innerHTML += arr[i].substr(val.length);
+        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+        b.addEventListener("click", function(e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+        });
+        a.appendChild(b);
+      }
+    }
+});
+inp.addEventListener("keydown", function(e) {
+    let x = document.getElementById(this.id + "autocomplete-list");
+    if (x) x = x.getElementsByTagName("div");
+    if (e.keyCode == 40) {
+      currentFocus++;
+      addActive(x);
+    } else if (e.keyCode == 38) {
+      addActive(x);
+    } else if (e.keyCode == 13) {
+      e.preventDefault();
+      if (currentFocus > -1) {
+        if (x) x[currentFocus].click();
+      }
+    }
+});
+function addActive(x) {
+  if (!x) return false;
+  removeActive(x);
+  if (currentFocus >= x.length) currentFocus = 0;
+  if (currentFocus < 0) currentFocus = (x.length - 1);
+  x[currentFocus].classList.add("autocomplete-active");
+}
+function removeActive(x) {
+  for (let i = 0; i < x.length; i++) {
+    x[i].classList.remove("autocomplete-active");
+  }
+}
+function closeAllLists(elmnt) {
+  let x = document.getElementsByClassName("autocomplete-items");
+  for (let i = 0; i < x.length; i++) {
+    if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+</script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <title>ADD TEAM</title>
+<!-- Firebase -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
+       <script src="js.js"></script>
+
+
+    <link rel="stylesheet" href="styles.css">
+    
+  </head>
+  <body>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/8.2.4/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+<a href="index.html" style="float: left;">HOME</a>
+<a href="vTeams.html" style="float: right;">View Teams</a>
+ <br/>
+    
+
+
+<!-- Add Team div -->
+ <div class="container" id="addTeamDiv">
+ 
+    <center><h4>TEAM DETAILS</h4></center>
+    <br/>
+        <br/>
+
+    <div class="form-group">
+<input  type="text" name="tName" id="tName" value="" required/>
+              <label for="input" class="control-label">TEAM NAME</label><i class="bar"></i>
+            </div>  
+                  <br/>
+                  <div class="form-group" >
+                    <input  type="text" name="tTag" id="tTag" value=""/>
+                                  <label for="input" class="control-label">TEAM TAG</label><i class="bar"></i>
+                                </div> 
+                                <br/>
+            <div class="form-group" >
+                <select name="tLobby" id="tLobby">
+                  <option value="A" name="A">Lobby A</option>
+                  <option value="B" name="B">Lobby B</option>
+                  <option value="C" name="C">Lobby C</option>
+                  </select>
+                       <label for="select" class="control-label">TEAM Lobby</label><i class="bar"></i>
+                               </div> 
+                                 <br/>
+     
+     <input id="logos" type="file" name="logos" style="width:100%;" accept=".png, .jpg, .jpeg">
+        <progress value="0" max="100" id="uploader"></progress>
+      <div>
+            <div id="imagePreview">
+            <img id="img" width="100%" src="" style="display:none;">
+            </div>
+        </div>
+     
+            <br/>
+
+            <br>
+            <div class="form-group" style="display:none;">
+<input  type="text" name="tLogo" id="tLogo" value="" readonly/>
+              <label for="input" class="control-label">tLogo</label><i class="bar"></i>
+            </div>               
+                  <br/>
+                  <center><div id="error" style="color:red; display:none;">Fill all details</div></center>
+     <center><button  class="button"  id="addTeam" onclick="addTeam()"><span>ADD</span></button></center>
+<br/>
+          </div>
+<script>
+//for the image
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#img').attr({ src: e.target.result});
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#logos").change(function() {
+    readURL(this);
+});
+
+
+//to upload the image and get the download link for the image and display it in html
+var artup = document.getElementById('logos');
+var uploader = document.getElementById('uploader');
+artup.addEventListener('change', function(e){
+  var file = e.target.files[0];
+
+  var upart = firebase.storage().ref('logos/' + file.name);
+  var load = upart.put(file);
+  load.on('state_changed',
+  function progress(snapshot){
+    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploader.value = percentage;
+  },
+  
+  //runs if there is an error in uploading
+    function error(err){
+      alert("error");
+    },
+
+    //runs when logos is uploaded
+    function complete(){
+      upart.getDownloadURL().then(function(url) {
+         document.getElementById('tLogo').value = url;
+        $("#img").attr({
+          src: url
+        });
+    },
+  )
+  document.getElementById('img').style.display="block";
+    });
+});
+</script>
+  </body>
+</html>
