@@ -531,6 +531,9 @@ width:50%;
           .lcsA .scrypted3{
             content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2F21st.png?alt=media&token=f2317b12-f39b-4e10-9141-525da9391d28");
             }
+            .lcsA .scrypted4{
+              content:url("https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FAG.jpg?alt=media&token=7d18ab12-b8d6-4478-83ab-b0529a1667d3");
+              }
       
       .lcsA .boardRows {
         background-color: black;
@@ -581,6 +584,9 @@ width:50%;
         .lcsB .scrypted3{
           content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2F21st.png?alt=media&token=f2317b12-f39b-4e10-9141-525da9391d28");
           }
+          .lcsB .scrypted4{
+            content:url("https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FAG.jpg?alt=media&token=7d18ab12-b8d6-4478-83ab-b0529a1667d3");
+            }
           .lcsB .boardRows {
             background-color: black;
           }
@@ -630,7 +636,9 @@ width:50%;
           .pmco .scrypted3{
             content:url("https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2F21st.png?alt=media&token=f2317b12-f39b-4e10-9141-525da9391d28");
             }
-      
+            .pmco .scrypted4{
+              content:url("https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FAG.jpg?alt=media&token=7d18ab12-b8d6-4478-83ab-b0529a1667d3");
+              }
             .pmco .boardRows {
               background-color: black;
             }
