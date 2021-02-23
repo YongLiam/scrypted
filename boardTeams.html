@@ -158,7 +158,7 @@ autocomplete(document.getElementById("team["+i+"]"), tagName);
  function getNoTeams(a) {
   let nooTeams = prompt(a);
   if(nooTeams == 0)
-  location.href = "vlcsA.html";
+  location.href = "index.html";
   else if(nooTeams > 0 && nooTeams<=25)
   return nooTeams;
   else
@@ -232,7 +232,7 @@ function update()
           teams: leaderboardTeams,
         }).then(function() {
           alert("Teams updated!")
-        location.href='lcsA.html';
+        location.href='leaderboard.html';
 })
 .catch(function(error) {
    alert("Error updating Teams: ", error);
