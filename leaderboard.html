@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="UTF-8">
-    <title>UPDATE LOBBY A</title>
+    <title>UPDATE LEADERBOARD</title>
 <!-- Firebase -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
@@ -76,7 +76,14 @@ input[type=text] {
 <!-- Initialize Firebase -->
 <script src="/__/firebase/init.js"></script>
 
-<a href="index.html" style="float: right;">HOME</a>
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="addTeams.html">Add_Team</a></li>
+  <li><a href="boardTeams.html">Lobby_Teams</a></li>
+  <li><a class="active" href="leaderboard.html">Leaderboard</a></li>
+</ul>
+
+ <br/>
  <br/>
     
  
@@ -134,7 +141,8 @@ let pos = 0;
  {
    lobby = prompt("Enter lobby code: ");
    if(lobby == 'lcsA' || lobby == 'lcsB' || lobby == 'pmco') {
-   db.collection("leaderboards").doc(lobby).get().then(function(doc) {
+noTeams = getNoTeams("Enter No. of teams:");
+db.collection("leaderboards").doc(lobby).get().then(function(doc) {
       // pass teams tagName to array
       if(doc.data().teams != undefined)
       teams.push(...doc.data().teams);
@@ -147,9 +155,8 @@ let pos = 0;
   tagName.push(teams[i].tagName);
   console.log(tagName)
 });
-noTeams = getNoTeams("Enter No. of teams:");
      for(let i=1;i<=noTeams;i++)
-     document.getElementById("rows["+i+"]").innerHTML = '<input id="pos['+i+']" type="text" name="20" value="#'+i+'" style="width: 15%; text-align: center; background:#8F4299; color:white; border:0;" readonly><input id="team['+i+']" type="text" name="tagTeam" placeholder="Team Tag" style="width: 60%;"><input id="kills['+i+']" type="number" name="tagTeam" placeholder="Kills" style="width: 20%;">';
+     document.getElementById("rows["+i+"]").innerHTML = '<input id="pos['+i+']" type="text" name="20" value="#'+i+'" style="width: 15%; text-align: center; background:#560060; color:white; border:0;" readonly><input id="team['+i+']" type="text" name="tagTeam" placeholder="Team Tag" style="width: 60%;"><input id="kills['+i+']" type="number" name="tagTeam" placeholder="Kills" style="width: 20%;">';
 //autocomplete
 for(i=1; i<=noTeams; i++)
 autocomplete(document.getElementById("team["+i+"]"), tagName);
@@ -306,8 +313,8 @@ function update()
         result: finalResult,
         oldResult: oldResult,
       }).then(function(){
-        alert("Leaderboard updated!")
         location.href = 'v'+lobby+'.html';
+        alert("Leaderboard updated!")
       }).catch(function(error) {
    alert("Error updating leaderboard: ", error);
 }); 

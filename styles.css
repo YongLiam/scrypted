@@ -21,7 +21,7 @@ body *::before {
 
 body {
     color:white;
-  background-color: #1B1B1B;
+  background-color: #111111;
   
 }
 
@@ -34,19 +34,52 @@ h1 {
   margin: 0 0 2em;
 }
 
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0a1820;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #8F4299;
+}
+
 .container {
-  background: #152730;
+  background: #111111;
+  background: url('https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FlcsB.png?alt=media&token=767b91d9-b75b-4401-aea9-db231194f56e');
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: 100% 100%;
   position: relative;
   max-width: 40rem;
   border: solid 1px;
-  border-color: #999;
-  margin: 
-  1rem auto;
-
+  margin: 1rem auto;
   width: 100%;
   padding: 3rem 5rem 0;
   border-radius: 1px;
-  border-color:white;
+  border-color: #8F4299
 }
 .container::before {
   content: '';

@@ -41,35 +41,33 @@
 
 <!-- Initialize Firebase -->
 <script src="/__/firebase/init.js"></script>
+<ul>
+  <li><a class="active" href="index.html">Home</a></li>
+  <li><a href="addTeams.html">Add_Team</a></li>
+  <li><a href="boardTeams.html">Lobby_Teams</a></li>
+  <li><a href="leaderboard.html">Leaderboard</a></li>
+  <li><a href="vTeams.html" style="color: red;">Teams</a></li>
+</ul>
 
  <br/>
-    
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
 
 
 <!-- Add Team div -->
- <div class="container" id="addTeamDiv">
+ <div class="container" id="addTeamDiv" style="background: url('https://firebasestorage.googleapis.com/v0/b/scrypted-lcs.appspot.com/o/background%2FlcsB.png?alt=media&token=767b91d9-b75b-4401-aea9-db231194f56e');
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: 100% 100%;">
  
-    <center><h4>SCRYPTED</h4> <br> Enter passcode to continue</center>
+    <center><img src="https://firebasestorage.googleapis.com/v0/b/demotest-73a88.appspot.com/o/assetss%2Fscrypted_icon.png?alt=media&token=06f54655-5b45-46ad-8d71-4ff5eb2b6f44" width="70px"> <br>SCRYPTED ESPORTS</center>
     <br/>
         <br/>
 
-    <div class="form-group">
-<input  type="text" name="pass" id="pass" value="" required/>
-              <label for="input" class="control-label">PASSCODE</label><i class="bar"></i>
-            </div>  
-                                <br/>
-            <div class="form-group" >
-                <select name="nextMove" id="nextMove">
-                  <option value="leaderboard" name="A">LEADERBOARD</option>
-                  <option value="vTeams" name="vTeams">Modify Teams</option>
-                  </select>
-                       <label for="select" class="control-label">Choose Action</label><i class="bar"></i>
-                               </div> 
-                                 <br/>              
-                  <br/>
-                  <center><div id="error" style="color:red; display:none;">Fill all details</div></center>
-     <center><button  class="button"  id="go" onclick="goNext()"><span>GO</span></button></center>
-<br/>
+    
           </div>
   </body>
   <script>
